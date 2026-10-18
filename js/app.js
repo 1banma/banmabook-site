@@ -1,9 +1,9 @@
 
 function toast(m){var t=document.createElement('div');t.className='toast toast-info';t.innerHTML='<span class="toast-message">'+m+'</span>';document.body.appendChild(t);setTimeout(function(){t.remove()},1800);}
-function copyText(s){if(navigator.clipboard){navigator.clipboard.writeText(s).then(function(){toast('链接已复制，去网盘转存')},function(){fb(s)});}else{fb(s);}}
-function fb(s){var i=document.createElement('textarea');i.value=s;document.body.appendChild(i);i.select();try{document.execCommand('copy');toast('链接已复制');}catch(e){toast('复制失败，请手动长按');}i.remove();}
+function copyText(s,msg){msg=msg||'链接已复制，去网盘转存';if(navigator.clipboard){navigator.clipboard.writeText(s).then(function(){toast(msg)},function(){fb(s,msg)});}else{fb(s,msg);}}
+function fb(s,msg){msg=msg||'链接已复制';var i=document.createElement('textarea');i.value=s;document.body.appendChild(i);i.select();try{document.execCommand('copy');toast(msg);}catch(e){toast('复制失败，请手动长按');}i.remove();}
 document.addEventListener('click',function(e){
-  var b=e.target.closest('.copy-btn');if(b){e.preventDefault();copyText(b.getAttribute('data-copy'));return;}
+  var b=e.target.closest('.copy-btn');if(b){e.preventDefault();copyText(b.getAttribute('data-copy'),b.getAttribute('data-msg'));return;}
   var x=e.target.closest('.modal-close');if(x&&document.getElementById('mwrap')){e.preventDefault();closeModal();return;}
   var a=e.target.closest('.book-card');if(a){return;}
   var c=e.target.closest('.cta');if(c){e.preventDefault();var t=document.getElementById('dl');if(t)t.scrollIntoView({behavior:'smooth'});return;}
