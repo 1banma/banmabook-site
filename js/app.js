@@ -16,6 +16,17 @@ function openModal(href){closeModal();fetch(href).then(function(r){return r.text
   ov.addEventListener('click',function(e){if(e.target===ov)closeModal();});
 }).catch(function(){location.href=href;});}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+(function(){
+function getSyn(){return document.getElementById('synModal');}
+function openSyn(){var m=getSyn();if(!m)return;if(m.parentNode!==document.body)document.body.appendChild(m);m.classList.add('on');document.body.style.overflow='hidden';}
+function closeSyn(){var m=getSyn();if(m&&m.classList.contains('on')){m.classList.remove('on');document.body.style.overflow='';}}
+document.addEventListener('click',function(e){
+  if(e.target.closest('.syn-more')){openSyn();return;}
+  var m=getSyn();if(!m||!m.classList.contains('on'))return;
+  if(e.target===m||e.target.closest('.syn-sheet-x'))closeSyn();
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSyn();});
+})();
 var navq=document.getElementById('navq');
 if(navq){navq.addEventListener('keydown',function(e){if(e.key==='Enter'){location.href='/search.html?q='+encodeURIComponent(navq.value.trim());}});}
 (function(){var box=document.getElementById('results');if(!box)return;var DATA=null,inp=navq;
