@@ -49,6 +49,7 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 .dbadge{font-size:11px;color:var(--gray-3);background:var(--gray-6);border-radius:999px;padding:1px 9px;margin-left:8px;font-weight:400;vertical-align:1px}
 .dsec-hint{font-size:12px;color:var(--gray-4);margin-bottom:16px}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.pgrid-miss{font-size:12px;color:var(--gray-2);margin-top:10px}
 .pcard{border:1px solid #DDDCD7;border-radius:10px;padding:13px 14px;background:var(--gray-6)}
 .pcard-top{display:flex;align-items:center;gap:8px;margin-bottom:11px;flex-wrap:wrap}
 .pname{font-size:14px;font-weight:600}
