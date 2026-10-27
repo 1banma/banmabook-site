@@ -2,6 +2,11 @@
 
 
 h1.section-title{margin:0;font-size:15px;font-weight:600;line-height:1.45;letter-spacing:.02em;color:var(--black)}
+.hot-block{margin-bottom:6px}
+.hot-block .section-head{display:flex;align-items:baseline;gap:12px}
+.section-more{margin-left:auto;font-size:12px;color:var(--gray-3);padding:3px 12px;border:1px solid var(--gray-5);border-radius:20px;transition:all .15s var(--ease)}
+.section-more:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-light)}
+.hot-divider{height:1px;background:var(--gray-5);margin:30px 0 26px}
 .detail-area{display:flex;justify-content:center;padding-top:26px}
 .detail-area .modal{position:static;margin:0 auto;max-height:none;overflow:visible}
 .nav-logo{color:inherit}
