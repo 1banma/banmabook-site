@@ -110,3 +110,12 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 .pkg-zoom-img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:8px;background:#fff;-webkit-touch-callout:default;-webkit-user-select:auto;user-select:auto}
 .pkg-zoom-tip{margin-top:16px;font-size:13px;color:#fff;opacity:.85}
 @media(max-width:768px){.pkg-modal{padding:0;align-items:flex-end}.pkg-qr{width:200px;height:200px}}
+/* ================= 列表卡片：左边封面，右边文字 ================= */
+/* 原样式把 .book-cover 设成了 display:none，这里接回来，卡片从纯文字改成图文 */
+.book-card{flex-direction:row;align-items:stretch;gap:14px;padding:16px 18px}
+.book-cover{display:block;flex:none;align-self:flex-start;width:66px;height:95px;border-radius:3px;overflow:hidden;background:var(--gray-6);box-shadow:0 6px 14px -10px rgba(26,26,26,.5)}
+.book-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.book-cover.ph{display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,rgba(0,0,0,.15) 0 5px,transparent 5px),var(--sc);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.book-cover.ph span{writing-mode:vertical-rl;font-size:14px;line-height:1.55;letter-spacing:.1em;font-weight:500;color:#fff;opacity:.92;max-height:88px;overflow:hidden}
+.book-info{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+@media(max-width:768px){.book-card{align-items:center;gap:12px;padding:12px 0}.book-card:active{margin:0 -20px;padding:12px 20px}.book-cover{width:50px;height:72px}.book-info{gap:3px}.book-cover.ph span{font-size:11.5px;max-height:62px}.book-card-title{flex:none;white-space:normal;overflow:visible;text-overflow:clip;font-size:14.5px;line-height:1.45}.book-card-meta-line{display:flex}}
