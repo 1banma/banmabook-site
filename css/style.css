@@ -117,7 +117,10 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 .bcard{display:flex;gap:18px;padding:16px;background:var(--pure-white);border:1px solid #E7E4DC;border-radius:14px;color:inherit;transition:border-color .2s var(--ease),box-shadow .25s var(--ease),transform .25s var(--ease)}
 .bcard:hover{border-color:#D9D5CA;box-shadow:0 16px 34px -18px rgba(26,26,26,.45);transform:translateY(-2px)}
 .bcov{position:relative;flex:none;width:146px;aspect-ratio:278/400;border-radius:8px;overflow:hidden;background:var(--gray-6);box-shadow:0 7px 18px -10px rgba(26,26,26,.6)}
-.bcov img{width:100%;height:100%;object-fit:cover;display:block}
+.bcov img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .4s var(--ease)}
+/* 图还在路上时给一块会走的底色，不要晾一块死白让人以为图挂掉了 */
+.bcov.ld{background:linear-gradient(100deg,#EDEAE3 30%,#F8F6F1 48%,#EDEAE3 66%);background-size:220% 100%;animation:covld 1.3s linear infinite}
+@keyframes covld{from{background-position:120% 0}to{background-position:-120% 0}}
 .bcov:after{content:"";position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(26,26,26,.10)}
 /* 没抓到封面的书：做成一本素书脊，浅米底 + 竖排书名，安静不抢戏 */
 .bcov.ph{--sc:#4A6741;display:flex;align-items:center;justify-content:center;background:linear-gradient(158deg,#F3F0E9,#E9E5DC);box-shadow:0 5px 14px -12px rgba(26,26,26,.7)}
