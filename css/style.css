@@ -113,6 +113,7 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 /* ================= 列表卡片：左边封面，右边书名标签简介 ================= */
 /* 旧样式 .book-grid/.book-card 那套三列纯文字卡不再用，这里用 b 前缀重新做一套，互不干扰 */
 .bgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.bgrid .empty-state{grid-column:1/-1}
 .bcard{display:flex;gap:18px;padding:16px;background:var(--pure-white);border:1px solid #E7E4DC;border-radius:14px;color:inherit;transition:border-color .2s var(--ease),box-shadow .25s var(--ease),transform .25s var(--ease)}
 .bcard:hover{border-color:#D9D5CA;box-shadow:0 16px 34px -18px rgba(26,26,26,.45);transform:translateY(-2px)}
 .bcov{position:relative;flex:none;width:146px;aspect-ratio:278/400;border-radius:8px;overflow:hidden;background:var(--gray-6);box-shadow:0 7px 18px -10px rgba(26,26,26,.6)}
@@ -140,3 +141,22 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 .bcard:hover .bmore svg{transform:translateX(3px)}
 @media(max-width:1100px){.bgrid{grid-template-columns:1fr}}
 @media(max-width:768px){.bcard{gap:14px;padding:13px;border-radius:12px}.bcov{width:112px}.bcov.ph .ch{font-size:11.5px}.bt{font-size:15px}.bdesc{-webkit-line-clamp:2;font-size:12px}.bfoot{font-size:10.5px}}
+/* 手机：两列竖排。横排（封面贴左、字在右）在窄屏只剩一条缝，书名被挤成两三个字一行，
+   改成一上一下——封面占满列宽，下面只留书名、作者、编号，简介和次要标签收起来 */
+@media(max-width:600px){
+.bgrid{grid-template-columns:repeat(2,1fr);gap:12px}
+.bcard{flex-direction:column;gap:0;padding:8px;border-radius:10px}
+.bcard:hover{transform:none;box-shadow:0 6px 16px -12px rgba(26,26,26,.5);border-color:#E7E4DC}
+.bcov{width:100%;border-radius:6px;box-shadow:0 4px 12px -9px rgba(26,26,26,.6)}
+.bcov:after{border-radius:6px}
+.bcov.ph .ch{font-size:11.5px;line-height:1.55;max-height:92%}
+.bmain{padding:0;margin-top:9px}
+.bt{font-size:13px;line-height:1.4}
+.bsub{margin-top:4px;font-size:10.5px}
+.btags{margin-top:6px;gap:4px}
+.tg{font-size:9.5px;padding:3px 5px;border-radius:4px}
+.tg.pale{display:none}
+.bdesc{display:none}
+.bfoot{margin-top:auto;padding-top:8px;font-size:9.5px;gap:5px;white-space:nowrap;overflow:hidden}
+.bmore{display:none}
+}
