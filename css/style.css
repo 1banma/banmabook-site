@@ -81,7 +81,34 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 .pager .pg.more{font-size:12.5px;padding:7px 11px;color:var(--accent);border-color:#D9D5C8}
 .pager .pgd{color:var(--gray-4);padding:0 2px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@media(max-width:768px){.detail-area{padding:0}.detail-area .modal{border:none;box-shadow:none;max-width:none}.modal-wide{max-width:none;background:transparent;border:none}.dbody{flex-direction:column;gap:22px}.dleft{width:100%;text-align:center}.dcov{width:max-content;height:219px;margin:0 auto;border-radius:4px}.dcov img{height:219px;max-width:200px}.dcov.ph{width:152px}.dcov.ph .ch{font-size:11px}.dright{width:100%;text-align:left}.dcard{padding:16px 18px 6px;border-radius:10px}.drow{padding:12px 0}.drow .k{width:84px;font-size:12.5px}.drow .v{font-size:12.5px}.scard{padding:16px 18px;border-radius:10px}.dpanel{padding:16px 18px 20px;border-radius:10px}.pgrid{grid-template-columns:1fr 1fr;gap:10px}.dlc{padding:13px 12px 12px;border-radius:12px}.dlc-h{flex-wrap:wrap;gap:6px;margin-bottom:12px}.dlc-n{font-size:13.5px}.dlc-code{font-size:10.5px;padding:2px 6px}}
+/* 手机端不另起一套排版：封面在左、信息在右，跟桌面是同一条 flex 规则，
+   这里只把尺寸按比例收小。以后要调结构，改上面的桌面规则，这一块别动。
+   .dcov 的 216 和 .drow 的 8 是一对：六行信息卡加上下内边距正好 216，
+   跟封面上下齐平。改行高就得连着改封面高度，否则一边高一边矮。 */
+@media(max-width:768px){
+.detail-area{padding:0}
+.detail-area .modal{border:none;box-shadow:none;max-width:none}
+.modal-wide{max-width:none;background:transparent;border:none}
+.dbody{gap:14px;margin-bottom:16px}
+.dcov{height:216px;margin:0;border-radius:4px}
+.dcov img{height:216px;max-width:150px}
+.dcov.ph{width:150px}
+.dcov.ph .ch{font-size:10px;letter-spacing:.1em;line-height:1.5;max-height:80%}
+.dcard{padding:9px 13px 7px;border-radius:10px}
+/* 卡片小标题和书名行在手机上省掉：封面本身就带书名，桌面留着这两行 */
+.dcard-t{display:none}
+.drow{padding:8px 0}
+.drow:first-child{display:none}
+.drow .k{width:46px;font-size:11px}
+.drow .v{font-size:11.5px}
+.scard{padding:16px 18px;border-radius:10px}
+.dpanel{padding:16px 18px 20px;border-radius:10px}
+.pgrid{grid-template-columns:1fr 1fr;gap:10px}
+.dlc{padding:13px 12px 12px;border-radius:12px}
+.dlc-h{flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.dlc-n{font-size:13.5px}
+.dlc-code{font-size:10.5px;padding:2px 6px}
+}
 .related-grid .bdesc{display:none}
 .syn-modal{display:none;position:fixed;top:0;right:0;bottom:0;left:0;background:#00000059;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);align-items:center;justify-content:center;z-index:1200;padding:32px;animation:fadeIn .18s var(--ease)}
 .syn-modal.on{display:flex}
