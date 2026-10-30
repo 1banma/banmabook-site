@@ -36,12 +36,24 @@ else window.addEventListener('load',fitSyn);
 })();
 var navq=document.getElementById('navq');
 if(navq){navq.addEventListener('keydown',function(e){if(e.key==='Enter'){location.href='/search.html?q='+encodeURIComponent(navq.value.trim());}});}
-(function(){var box=document.getElementById('results');if(!box)return;var DATA=null,inp=navq;
+// 窄屏顶栏放不下输入框，先收成一枚放大镜，点开再铺满整条
+(function(){var ns=document.getElementById('navSearch');if(!ns||!navq)return;
+var mq=window.matchMedia('(max-width:768px)'),cancel=ns.querySelector('.q-cancel');
+function qopen(){document.body.classList.add('q-on');navq.focus();}
+function qshut(){document.body.classList.remove('q-on');navq.blur();}
+ns.addEventListener('click',function(e){if(!mq.matches||document.body.classList.contains('q-on'))return;e.preventDefault();qopen();});
+if(cancel)cancel.addEventListener('click',function(e){e.stopPropagation();qshut();});
+document.addEventListener('click',function(e){if(document.body.classList.contains('q-on')&&!ns.contains(e.target))qshut();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('q-on'))qshut();});
+})();
+(function(){var box=document.getElementById('results');if(!box)return;
+var DATA=null,sq=document.getElementById('sq'),inp=sq||navq;
 function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function render(list){if(!list.length){box.innerHTML='<div class="bgrid"><div class="empty-state"><p>没有匹配的书名或作者</p></div></div>';return;}box.innerHTML='<div class="bgrid">'+list.slice(0,300).map(function(b){var cv=b.s?'<div class="bcov"><img src="/covers/'+b.s+'.webp" alt="" loading="lazy" decoding="async"></div>':'<div class="bcov ph" style="--sc:#4A6741"><span class="ch">'+esc(b.title)+'</span></div>';var no=b.s?'<span class="bno">NO.'+esc(b.s)+'</span>':'';return '<a class="bcard" href="/book/'+b.id+'.html">'+cv+'<div class="bmain"><div class="bt">'+esc(b.title)+'</div><div class="bsub">'+esc(b.author)+'</div><div class="btags"><span class="tg">'+esc(b.category)+'</span><span class="tg pale">TXT</span></div><div class="bfoot">'+no+'<span class="bmore">查看详情 <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="19" y2="12"></line><polyline points="13 6 19 12 13 18"></polyline></svg></span></div></div></a>';}).join('')+'</div>';covFade(box);}
-function go(k){if(!DATA)return;k=(k||'').toLowerCase();if(!k){box.innerHTML='';return;}render(DATA.filter(function(b){return (b.title||'').toLowerCase().indexOf(k)>=0||(b.author||'').toLowerCase().indexOf(k)>=0;}));}
-fetch('/search.json').then(function(r){return r.json();}).then(function(d){DATA=d;var p=(new URLSearchParams(location.search)).get('q')||'';if(inp){inp.value=p;inp.focus();}go(p);});
-if(inp){inp.addEventListener('input',function(){go(inp.value);});}
+function go(k){if(!DATA)return;k=(k||'').toLowerCase();var h=document.getElementById('shint');if(h)h.style.display=k?'none':'';if(!k){box.innerHTML='';return;}render(DATA.filter(function(b){return (b.title||'').toLowerCase().indexOf(k)>=0||(b.author||'').toLowerCase().indexOf(k)>=0;}));}
+fetch('/search.json').then(function(r){return r.json();}).then(function(d){DATA=d;var p=(new URLSearchParams(location.search)).get('q')||'';if(inp){inp.value=p;if(navq&&sq)navq.value=p;inp.focus();}go(p);});
+if(inp){inp.addEventListener('input',function(){if(navq&&sq)navq.value=inp.value;go(inp.value);});}
+(function(){var gb=document.getElementById('sgo');if(!gb||!inp)return;gb.addEventListener('click',function(){go(inp.value);inp.blur();});})();
 })();
 (function(){
 function getPkg(){return document.getElementById('pkgModal');}

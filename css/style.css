@@ -54,7 +54,7 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 .dl-label{color:var(--accent);font-weight:600;letter-spacing:.14em;margin-right:10px;text-transform:uppercase;font-size:11px}
 .dbadge{font-size:11.5px;color:var(--accent);background:var(--accent-light);border:1px solid rgba(74,103,65,.14);border-radius:20px;padding:2px 10px;margin-left:8px;font-weight:400;vertical-align:1px}
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
-.pgrid-miss{font-size:12px;color:var(--gray-3);margin-top:10px}
+.pgrid-miss{display:none;font-size:12px;color:var(--gray-3);margin-top:10px}
 /* 网盘卡：跟着平台自己的颜色走 */
 .dlc{position:relative;display:flex;flex-direction:column;padding:15px 14px 14px;border-radius:14px;background:linear-gradient(158deg,var(--bc-a),#ffffff 72%);border:1px solid var(--bc-b);box-shadow:0 8px 20px -18px var(--bc)}
 .dlc-h{display:flex;align-items:center;gap:8px;margin-bottom:14px;min-height:24px}
@@ -163,4 +163,47 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 .bdesc{display:none}
 .bfoot{margin-top:auto;padding-top:8px;font-size:9.5px;gap:5px;white-space:nowrap;overflow:hidden}
 .bmore{display:none}
+}
+/* ================= 搜索页自己的输入框 ================= */
+.sbox{display:flex;gap:10px;margin:2px 0 20px}
+.sbox input{flex:1;min-width:0;padding:13px 14px;font-size:16px;font-family:inherit;color:var(--black);background:var(--pure-white);border:1.5px solid #DDDCD7;border-radius:10px;outline:none;transition:border-color .18s var(--ease),box-shadow .18s var(--ease)}
+.sbox input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+.sbox input::placeholder{color:#B4B0A8}
+.sgo{flex:none;padding:0 22px;font-size:14px;font-family:inherit;color:#fff;background:var(--accent);border:none;border-radius:10px;cursor:pointer;transition:background .18s var(--ease)}
+.sgo:hover{background:#3E5737}
+.s-hint{font-size:13px;color:var(--gray-4);line-height:1.9;margin:14px 0 0}
+/* 取消只在窄屏点开搜索时出现，宽屏一直藏着 */
+.q-cancel{display:none}
+/* ================= 手机端打磨 ================= */
+@media(max-width:768px){
+/* 顶栏：logo 和三个链接把搜索挤成 61px，占位字都放不下，先收成一枚放大镜 */
+.top-nav-inner{position:relative}
+.nav-logo{min-height:40px}
+.nav-link{min-height:40px;display:inline-flex;align-items:center;padding:0 10px}
+.nav-search{flex:none;width:38px;height:38px;margin-left:auto;padding:0;border:1.5px solid var(--gray-5);border-radius:9px;background:var(--pure-white);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.nav-search .search-icon{position:static;transform:none;width:16px;height:16px;color:var(--gray-2)}
+.nav-search input{position:absolute;width:1px;height:1px;padding:0;border:0;opacity:0;pointer-events:none}
+.q-on .nav-logo,.q-on .nav-links{display:none}
+.q-on .nav-search{position:absolute;left:14px;right:14px;top:50%;transform:translateY(-50%);width:auto;height:40px;padding:0 54px 0 34px;justify-content:flex-start;cursor:default}
+.q-on .nav-search .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%)}
+.q-on .nav-search input{position:static;width:100%;height:38px;padding:0;border:0;background:transparent;box-shadow:none;opacity:1;pointer-events:auto;font-size:16px}
+.q-on .q-cancel{display:block;position:absolute;right:2px;top:50%;transform:translateY(-50%);padding:10px 8px;font-size:13px;color:var(--accent)}
+/* 详情页顶上的分类条跟这本书没关系，还高亮成本书分类，窄屏收掉省 88px */
+.pg-book .cat-bar{display:none}
+/* 触控：小到点不准的都补到 40 以上 */
+.crumb{margin-bottom:8px}
+.crumb a{display:inline-block;padding:10px 2px}
+.syn-more{padding:10px 0}
+.dlc-b{min-height:44px;display:flex;align-items:center;justify-content:center}
+.dlc-c{min-height:44px;display:flex;align-items:center;justify-content:center}
+.pager .pg{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+/* 灰卡在窄屏太占地方，收成一行字；只到一个盘时不要只占半屏 */
+.pgrid .dlc.off{display:none}
+.pgrid-miss{display:block}
+.pgrid.one{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.bsub{font-size:12px}
+.tg{font-size:11px;padding:4px 6px}
+.bfoot{font-size:11px}
 }
