@@ -26,6 +26,11 @@ document.addEventListener('click',function(e){
   if(e.target===m||e.target.closest('.syn-sheet-x'))closeSyn();
 });
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSyn();});
+// 简介没被截就藏掉展开按钮，不然点了弹出一个一模一样的东西
+function fitSyn(){var box=document.querySelector('.syn-box'),btn=document.querySelector('.syn-more');
+  if(!box||!btn)return;if(box.scrollHeight<=box.clientHeight+2)btn.style.display='none';}
+if(document.readyState==='complete')fitSyn();
+else window.addEventListener('load',fitSyn);
 })();
 var navq=document.getElementById('navq');
 if(navq){navq.addEventListener('keydown',function(e){if(e.key==='Enter'){location.href='/search.html?q='+encodeURIComponent(navq.value.trim());}});}
