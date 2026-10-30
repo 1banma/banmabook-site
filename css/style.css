@@ -105,9 +105,11 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none}
 .dpanel{padding:16px 18px 20px;border-radius:10px}
 .pgrid{grid-template-columns:1fr 1fr;gap:10px}
 .dlc{padding:13px 12px 12px;border-radius:12px}
-.dlc-h{flex-wrap:wrap;gap:6px;margin-bottom:12px}
+/* 平台名和提取码各占一行。手机上两列太窄，一行放不下时有的卡折行有的卡不折，
+   头一高按钮就错开了，所以这里固定竖排，谁都不许挤。 */
+.dlc-h{flex-direction:column;align-items:flex-start;gap:5px;margin-bottom:11px;min-height:0}
 .dlc-n{font-size:13.5px}
-.dlc-code{font-size:10.5px;padding:2px 6px}
+.dlc-code{font-size:10.5px;padding:2px 6px;max-width:100%}
 }
 .related-grid .bdesc{display:none}
 .syn-modal{display:none;position:fixed;top:0;right:0;bottom:0;left:0;background:#00000059;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);align-items:center;justify-content:center;z-index:1200;padding:32px;animation:fadeIn .18s var(--ease)}
